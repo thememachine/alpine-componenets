@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Carousel</title>
+  </head>
+  <body
+    x-data="{'isModalOpen': false}"
+    x-on:keydown.escape="isModalOpen=false"
+    :class="isModalOpen ? 'overflow-y-hidden':''"
+  >
+    <button x-on:click="isModalOpen = true">Open Modal</button>
+
+    <div
+      class="bg-black/60 w-screen h-screen z-30 flex items-center justify-center fixed inset-0"
+      role="dialog"
+      tabindex="-1"
+      x-show="isModalOpen"
+      x-cloak
+      x-transition
+    >
+      <!-- click away so we can close it  -->
+      <article
+        class="w-60 h-60 bg-red-800 shadow-lg"
+        x-on:click.away="isModalOpen = false"
+      >
+        <button aria-label="Close" x-on:click="isModalOpen=false">X</button>
+        <div>text</div>
+      </article>
+    </div>
+  </body>
+</html>

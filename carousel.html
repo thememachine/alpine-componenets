@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Carousel</title>
+  </head>
+  <body>
+    <!-- slider wrapper -->
+    <section
+      x-data="{isSliderOpen: false}"
+      :class="
+      isSliderOpen ? 'fixed top-0 z-20 bg-white/90 w-screen h-screen flex justify-center items-center' : 
+                      'relative w-1/2'
+      "
+      class=""
+      x-on:keydown.escape="isSliderOpen=false"
+      x-on:keydown.left="$refs.slider.scrollBy(-$refs.slideitem1.clientWidth,0)"
+      x-on:keydown.right="$refs.slider.scrollBy($refs.slideitem1.clientWidth,0)"
+    >
+      <!-- slider controls overall with -->
+      <article
+        :class="isSliderOpen ? 'w-11/12' : ''"
+        x-ref="slider"
+        class="flex overflow-x-auto scroll-smooth snap-mandatory snap-x z-0"
+      >
+        <!-- open close -->
+        <button
+          @click="isSliderOpen = !isSliderOpen"
+          class="z-10 absolute top-0 right-0"
+        >
+          <span x-show="isSliderOpen"> ❌ </span>
+          <span x-show="!isSliderOpen"> 🔍</span>
+        </button>
+
+        <!-- slider items -->
+        <div
+          x-ref="slideitem1"
+          class="flex flex-shrink-0 overflow-auto relative aspect-video w-full mr-2 snap-center transition"
+        >
+          <div
+            class="absolute top-0 left-0 object-cover bg-blue-200 w-full h-full"
+          >
+            Content 1
+          </div>
+        </div>
+        <div
+          x-ref="slideitem2"
+          class="flex flex-shrink-0 overflow-auto relative aspect-video w-full mr-2 snap-center transition"
+        >
+          <div
+            class="absolute top-0 left-0 h-full object-cover bg-blue-400 w-full"
+          >
+            Content 2
+          </div>
+        </div>
+        <div
+          x-ref="slideitem3"
+          class="flex flex-shrink-0 overflow-auto relative aspect-video w-full mr-2 snap-center transition"
+        >
+          <div
+            class="absolute top-0 left-0 h-full object-cover bg-blue-600 w-full"
+          >
+            Content 3
+          </div>
+        </div>
+      </article>
+      <!-- /slider items -->
+
+      <!-- navigation -->
+      <nav
+        aria-label="gallery navigation"
+        class="absolute bottom-0 flex flex-row my-4 space-x-2"
+      >
+        <button
+          @click="$refs.slider.scrollBy(-$refs.slideitem1.clientWidth,0)"
+          class="bg-pink-500 p-2 rounded"
+        >
+          ⬅️
+        </button>
+
+        <button
+          @click="$refs.slideitem1.scrollIntoView(false)"
+          class="bg-slate-500 rounded-full w-10 h-10"
+        >
+          1
+        </button>
+        <button
+          @click="$refs.slideitem2.scrollIntoView(false)"
+          class="bg-slate-500 rounded-full w-10 h-10"
+        >
+          2
+        </button>
+        <button
+          @click="$refs.slideitem3.scrollIntoView(false)"
+          class="bg-slate-500 rounded-full w-10 h-10"
+        >
+          3
+        </button>
+        <button
+          @click="$refs.slider.scrollBy($refs.slideitem1.clientWidth,0)"
+          class="bg-pink-500 p-2 rounded"
+        >
+          ➡️
+        </button>
+      </nav>
+      <!-- navigation -->
+    </section>
+
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima ea vitae
+      ut voluptas similique minus saepe quisquam dolorum reiciendis hic vero
+      harum aut, doloremque officiis officia fugiat illum architecto eaque.
+    </p>
+  </body>
+</html>
