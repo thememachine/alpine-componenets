@@ -6,11 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Carousel</title>
+    <title>Modal</title>
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+    </style>
   </head>
   <body
     x-data="{'isModalOpen': false}"
-    x-on:keydown.escape="isModalOpen=false"
     :class="isModalOpen ? 'overflow-y-hidden':''"
   >
     <button x-on:click="isModalOpen = true">Open Modal</button>
